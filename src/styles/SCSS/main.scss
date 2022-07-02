@@ -5,15 +5,19 @@
 
 //base
 //@import "base/reset";
+@import "base/fonts";
 @import "~normalize.css";
 @import "base/base";
-@import "base/fonts";
 
 //components
 @import "components/buttons";
 
 //layout
+@import "layout/header";
+@import "layout/footer";
+@import "layout/main";
 
 //pages
+@import "pages/start-page";
 
 //themes
