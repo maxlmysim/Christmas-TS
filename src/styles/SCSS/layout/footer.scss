@@ -1,0 +1,30 @@
+.footer {
+  width: 100%;
+  margin-bottom: 10px;
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $height-footer;
+
+    .logo-school {
+      background-image: url('../../assets/svg/rss.svg');
+      background-size: cover;
+      height: $height-footer;
+      width: calc(242 / 90 * $height-footer);
+    }
+
+    .github-logo {
+      background-image: url('../../assets/svg/github.svg');
+      background-size: cover;
+      height: $height-footer;
+      width: $height-footer;
+    }
+
+    .years-development {
+      font-size: calc($height-footer / 1.7);
+      color: #fff;
+    }
+  }
+}

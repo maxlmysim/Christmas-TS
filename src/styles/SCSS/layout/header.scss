@@ -1,0 +1,21 @@
+.header {
+  font-size: calc($height-header / 1.7);
+  width: 100%;
+  margin-top: 10px;
+
+  &-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px
+  }
+
+  .start-page-link {
+    display: inline-block;
+    background-image: url('../../assets/svg/tree.svg');
+    background-size: cover;
+    height: $height-header;
+    width: calc($height-header * 49 / 64);
+    filter: invert(51%) sepia(95%) saturate(491%) hue-rotate(60deg) brightness(121%) contrast(102%);
+  }
+}
