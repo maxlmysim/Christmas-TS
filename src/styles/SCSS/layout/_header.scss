@@ -13,7 +13,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px
+    gap: 20px;
+
+    &__link.active{
+      filter: invert(51%) sepia(95%) saturate(491%) hue-rotate(60deg) brightness(121%) contrast(102%);
+    }
   }
 
   .start-page-link {
@@ -22,6 +26,5 @@
     background-size: cover;
     height: $height-header;
     width: calc($height-header * 49 / 64);
-    filter: invert(51%) sepia(95%) saturate(491%) hue-rotate(60deg) brightness(121%) contrast(102%);
   }
 }

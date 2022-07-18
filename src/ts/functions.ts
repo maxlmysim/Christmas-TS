@@ -5,3 +5,16 @@ export function deleteSearchFieldAndBasket(): void {
     basket?.remove()
     search?.remove()
 }
+
+export function showCurrentPage(page: string) {
+    const links = document.querySelectorAll('.links__link')
+    const active = document.querySelector(`.${page}-page-link`)
+
+    if (links) {
+        links.forEach(link => link.classList.remove('active'))
+    }
+
+    if(active) {
+        active.classList.add('active')
+    }
+}
