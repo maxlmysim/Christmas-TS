@@ -29,7 +29,14 @@ export class ButtonsSelector extends HTMLBuilder {
             pageToys.init()
 
             resetFiltersPage()
+
+            const searchField = document.querySelector('.search-field') as HTMLInputElement
+            if (searchField) {
+                searchField.value = ''
+            }
+
         })
+
         wrapper.append(reset, clear)
 
         return wrapper

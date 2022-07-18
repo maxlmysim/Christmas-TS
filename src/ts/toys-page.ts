@@ -2,6 +2,7 @@ import {HTMLBuilder} from "./HTMLBuilder";
 import {FiltersMenu} from "./filtersMenu/filters-menu";
 import {ToysMenu} from './toysCards/toys-menu'
 import {CSS_CLASS} from "./enum";
+import {SearchField} from "./search-field";
 
 export class CreateToysPage extends HTMLBuilder {
     init() {
@@ -26,6 +27,12 @@ export class CreateToysPage extends HTMLBuilder {
             mainContainer.innerHTML = '';
             mainContainer.append(toysPage)
         }
+
+        const searchField = new SearchField()
+
+        const headerContainer: HTMLElement | null = document.querySelector('.header-container');
+        headerContainer?.append(searchField.create())
+
         //
         //
         // window.addEventListener('click', () =>{

@@ -12,6 +12,7 @@ export let filtersSettings: paramsFiltersSettings = {
     color: [],
     size: [],
     popular: false,
+    search: '',
 }
 
 export function setFiltersSettings(obj: paramsFiltersSettings): void {
@@ -28,6 +29,7 @@ export const resetFiltersSettings: paramsFiltersSettings = {
     color: [],
     size: [],
     popular: false,
+    search: '',
 }
 
 function updateDataWithFiltersSettings(): paramsToy[] {
@@ -53,6 +55,10 @@ function updateDataWithFiltersSettings(): paramsToy[] {
 
     if (filtersSettings.popular) {
         newData = popularSelection(newData)
+    }
+
+    if (filtersSettings.search) {
+        newData = searchToys(newData)
     }
 
     return newData
@@ -117,34 +123,24 @@ export function sortSelection(newData: paramsToy[]) {
     return newData
 }
 
-export function shapeSelection(newData: paramsToy[]) {
-    newData = newData.filter(toy => filtersSettings.shape.includes(toy.shape))
-    return newData
-}
+const shapeSelection = (newData: paramsToy[]) => newData.filter(toy => filtersSettings.shape.includes(toy.shape))
 
-export function quantitySelection(newData: paramsToy[]) {
+const quantitySelection = (newData: paramsToy[]) => {
     newData = newData.filter(toy => +toy.count >= filtersSettings.quantityMin &&
         +toy.count <= filtersSettings.quantityMax)
     return newData
 }
 
-export function yearSelection(newData: paramsToy[]) {
+const yearSelection = (newData: paramsToy[]) => {
     newData = newData.filter(toy => +toy.year >= filtersSettings.yearMin &&
         +toy.year <= filtersSettings.yearMax)
     return newData
 }
 
-export function colorSelection(newData: paramsToy[]) {
-    newData = newData.filter(toy => filtersSettings.color.includes(toy.color))
-    return newData
-}
+const colorSelection = (newData: paramsToy[]) => newData.filter(toy => filtersSettings.color.includes(toy.color))
 
-export function sizeSelection(newData: paramsToy[]) {
-    newData = newData.filter(toy => filtersSettings.size.includes(toy.size))
-    return newData
-}
+const sizeSelection = (newData: paramsToy[]) => newData.filter(toy => filtersSettings.size.includes(toy.size))
 
-export function popularSelection(newData: paramsToy[]) {
-    newData = newData.filter(toy => toy.favorite)
-    return newData
-}
+const popularSelection = (newData: paramsToy[]) => newData.filter(toy => toy.favorite)
+
+export const searchToys = (newData: paramsToy[]) => newData.filter(toy => toy.name.toLowerCase().includes(filtersSettings.search.toLowerCase()))

@@ -22,12 +22,14 @@ export class HTMLBuilder {
         if (params.name) (elem as HTMLInputElement).name = params.name
         if (params.for) (elem as HTMLLabelElement).htmlFor = params.for
         if (params.type) (elem as HTMLInputElement).type = params.type
-        if(params.value) (elem as HTMLInputElement).value = params.value
-        if(params.data) {
+        if (params.value) (elem as HTMLInputElement).value = params.value
+        if (params.data) {
             const atr = params.data.split(', ')
             elem.setAttribute(atr[0], atr[1])
         }
         if (params.disabled) (elem as HTMLInputElement).disabled = true
+        if (params.autofocus) (elem as HTMLInputElement).autofocus = true
+        if (params.placeholder) (elem as HTMLInputElement).placeholder = params.placeholder
 
         return elem
     }

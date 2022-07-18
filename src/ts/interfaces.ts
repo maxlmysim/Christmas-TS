@@ -16,7 +16,9 @@ export interface createElementParams {
     name?: string,
     type?: string,
     data?: string,
-    disabled?: boolean
+    disabled?: boolean,
+    autofocus?: boolean,
+    placeholder?: string
 }
 
 export interface paramsToy {
@@ -47,5 +49,6 @@ export interface paramsFiltersSettings {
     color: string[],
     size: string[],
     popular: boolean,
+    search: string
 }
 
