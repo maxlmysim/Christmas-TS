@@ -1,16 +1,34 @@
-import createElementParams from "./interfaces";
+import {createElementParams} from "./interfaces";
 
-class HTMLBuilder {
-    createElement(params: createElementParams) {
-        const elem = document.createElement(params.tag)
+export class HTMLBuilder {
+    createElement(params: createElementParams): HTMLElement {
+        const elem: HTMLElement = document.createElement(params.tag)
 
-        if(params.className) elem.className = params.className
-        if(params.textContent) elem.textContent = params.textContent
-        if(params.id) elem.id = params.id
-        if(params.href) (elem as HTMLLinkElement).href = params.href
+        if (params.className) {
+            elem.classList.add(...params.className.split(', '))
+        }
+        if (params.textContent) elem.textContent = params.textContent
+        if (params.id) elem.id = params.id
+        if (params.href) (elem as HTMLLinkElement).href = params.href
+        if (params.set) {
+            elem.setAttribute(params.set.title, params.set.name)
+        }
+        if (params.backgroundImage) {
+            elem.style.backgroundImage = params.backgroundImage
+        }
+        if (params.background) elem.style.background = params.background
+        if (params.value) (elem as HTMLSelectElement).value = params.value
+        if (params.selected) (elem as HTMLOptionElement).selected = params.selected
+        if (params.name) (elem as HTMLInputElement).name = params.name
+        if (params.for) (elem as HTMLLabelElement).htmlFor = params.for
+        if (params.type) (elem as HTMLInputElement).type = params.type
+        if(params.value) (elem as HTMLInputElement).value = params.value
+        if(params.data) {
+            const atr = params.data.split(', ')
+            elem.setAttribute(atr[0], atr[1])
+        }
+        if (params.disabled) (elem as HTMLInputElement).disabled = true
 
         return elem
     }
 }
-
-export default HTMLBuilder

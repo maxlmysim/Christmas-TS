@@ -1,0 +1,161 @@
+.filters-menu {
+  flex-basis: 25%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 10px;
+  order: 1;
+
+  .filter-name {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+  }
+
+  .filters__sort {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    .sort__selection {
+      font-size: 1.2rem;
+      display: block;
+      height: 30px;
+      border: 1px solid #fff;
+      border-radius: 15px;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 0);
+
+      option {
+        background-color: #2b6b49;
+      }
+    }
+  }
+
+  .filters__shape {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+
+    .shape__list {
+      display: flex;
+      justify-content: space-around;
+      font-size: 1.4rem;
+    }
+
+    .shape__toy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+
+      &:hover {
+        cursor: pointer;
+        filter: sepia(50%) saturate(550%);
+      }
+
+      &.active {
+        filter: sepia(100%) saturate(550%);
+      }
+    }
+
+    .shape__img {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 45px;
+      width: 45px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .slider {
+    .filter-name {
+      margin-bottom: 10px;
+    }
+
+    .slider__positions-handler {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.3rem;
+    }
+  }
+
+  .color {
+    .filters__color-container {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    &__color {
+      width: 25px;
+      height: 25px;
+      border-radius: 8px;
+      cursor: pointer;
+
+
+    }
+
+    .filters__color {
+      @each $color in (red, green, blue, yellow, white) {
+        &_#{"" + $color} {
+          background-color: $color;
+          transition: all 0.2s ease;
+
+          &:hover {
+            box-shadow: 0 0 1px 1px $color;
+          }
+
+          &.active {
+            box-shadow: 0 0 4px 4px $color;
+          }
+        }
+      }
+
+    }
+  }
+
+  .size {
+    .size__name {
+      margin-bottom: 10px;
+    }
+
+    .filters__size-container {
+      display: flex;
+      gap: 20px;
+    }
+
+    margin-bottom: 10px;
+  }
+
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+
+    input {
+      margin-right: 3px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-evenly;
+
+    .filters__button {
+      text-transform: capitalize;
+      background: #2e611a;
+      color: #fff;
+      border: 1px solid #fff;
+      height: 3rem;
+      border-radius: 1.5rem;
+    }
+  }
+}

@@ -1,22 +1,28 @@
-import HTMLBuilder from "./HTMLBuilder";
+import {HTMLBuilder} from "./HTMLBuilder";
+import {CSS_CLASS, href} from "./enum";
 
-class StartPage extends HTMLBuilder {
-    start() {
+export class StartPage extends HTMLBuilder {
+    init() {
+        const body = document.querySelector('body')
+        if (body) {
+            body.className = CSS_CLASS.mainBackground
+        }
+
         const helpWindow = this.createElement({
             tag: 'div',
-            className: 'help-window'
+            className: CSS_CLASS.helpWindow
         })
         const helpText = this.createElement({
             tag: 'div',
-            className: 'help-text',
-            textContent: 'Помогите бабушке нарядить елку'
+            className: CSS_CLASS.helpText,
+            textContent: 'Выбери себе игрушки на елку'
         })
 
         const startButton = this.createElement({
             tag: 'a',
-            className: 'btn-start',
+            className: CSS_CLASS.buttonStart,
             textContent: 'Начать',
-            href: '#toys'
+            href: `#${href.toysPage}`
         })
 
         helpWindow.append(helpText)
@@ -24,12 +30,13 @@ class StartPage extends HTMLBuilder {
         const mainContainer: HTMLElement | null = document.querySelector('.main-container');
         const startPage = this.createElement({
             tag: 'div',
-            className: 'start-page'
+            className: CSS_CLASS.startPage
         })
 
         startPage.append(helpWindow, startButton)
-        mainContainer?.append(startPage)
+        if (mainContainer) {
+            mainContainer.innerHTML = ''
+            mainContainer.append(startPage)
+        }
     }
 }
-
-export default StartPage

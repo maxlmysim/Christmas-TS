@@ -4,20 +4,26 @@
 @import "abstracts/placeholders";
 
 //base
-//@import "base/reset";
+@import "base/reset";
 @import "base/fonts";
-@import "~normalize.css";
+//@import "~normalize.css";
 @import "base/base";
 
 //components
 @import "components/buttons";
+@import "components/sliders";
 
 //layout
 @import "layout/header";
 @import "layout/footer";
 @import "layout/main";
+@import "layout/toys-cards";
+@import "layout/filters-menu";
+
+
 
 //pages
 @import "pages/start-page";
+@import "pages/toys-page";
 
 //themes

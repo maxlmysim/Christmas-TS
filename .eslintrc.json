@@ -4,9 +4,9 @@
         "es2021": true
     },
     "extends": [
-        "plugin:@typescript-eslint/recommended",
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -17,10 +17,10 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint",
-        "react"
+        "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/no-explicit-any" : "error"
+        "@typescript-eslint/no-explicit-any" : "error",
+        "@typescript-eslint/prefer-ts-expect-error": "off"
     }
 }
