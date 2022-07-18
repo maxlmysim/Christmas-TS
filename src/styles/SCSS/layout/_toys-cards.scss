@@ -36,7 +36,20 @@
       background-repeat: no-repeat;
       background-position: center;
     }
+    &__basket {
+      background-color: rgba(255,238,0,.507);
+    }
+  }
 
+  .no-results {
+    &__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
+    &__text {
+      font-size: 3rem;
+    }
   }
 }

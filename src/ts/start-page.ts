@@ -1,5 +1,6 @@
 import {HTMLBuilder} from "./HTMLBuilder";
 import {CSS_CLASS, href} from "./enum";
+import {deleteSearchFieldAndBasket} from "./functions";
 
 export class StartPage extends HTMLBuilder {
     init() {
@@ -38,5 +39,7 @@ export class StartPage extends HTMLBuilder {
             mainContainer.innerHTML = ''
             mainContainer.append(startPage)
         }
+
+        deleteSearchFieldAndBasket()
     }
 }

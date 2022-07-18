@@ -49,6 +49,7 @@ export interface paramsFiltersSettings {
     color: string[],
     size: string[],
     popular: boolean,
-    search: string
+    search: string,
+    basket: string[]
 }
 

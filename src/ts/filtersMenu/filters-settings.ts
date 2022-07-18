@@ -1,6 +1,9 @@
 import {paramsFiltersSettings, paramsToy} from "../interfaces";
 import {FiltersMenu} from "./filters-menu";
 import data from "../../data/data";
+import {NoResults} from "../constans";
+import {CSS_CLASS} from "../enum";
+import {basket, changeNumberBasket} from "../basket";
 
 export let filtersSettings: paramsFiltersSettings = {
     sort: 'sortNameDown',
@@ -13,6 +16,7 @@ export let filtersSettings: paramsFiltersSettings = {
     size: [],
     popular: false,
     search: '',
+    basket: []
 }
 
 export function setFiltersSettings(obj: paramsFiltersSettings): void {
@@ -30,6 +34,7 @@ export const resetFiltersSettings: paramsFiltersSettings = {
     size: [],
     popular: false,
     search: '',
+    basket: []
 }
 
 function updateDataWithFiltersSettings(): paramsToy[] {
@@ -65,6 +70,7 @@ function updateDataWithFiltersSettings(): paramsToy[] {
 }
 
 export function updateToys(): void {
+    saveLocalStorage()
     showAllCards()
     const nodeCards = document.querySelectorAll('.toy-card')
     if (!nodeCards) return
@@ -95,6 +101,8 @@ export function updateToys(): void {
     if (cardsHide.length !== 0) {
         animate(0)
     }
+
+    checkEmpty(nodeCards, cardsHide)
 }
 
 function showAllCards() {
@@ -103,6 +111,95 @@ function showAllCards() {
     nodeCards.forEach(card => card.classList.remove('anim', 'hide'))
 }
 
+function checkEmpty(nodeCards: NodeList, cardsHide: Element[]) {
+    const place = document.querySelector('.no-results__container')
+    place?.remove()
+
+    if (nodeCards.length === cardsHide.length) {
+        const results = new NoResults()
+        const place = document.querySelector('.toys-cards')
+        place?.append(results.create())
+    }
+}
+
+function saveLocalStorage() {
+    localStorage.setItem('settings', JSON.stringify(filtersSettings))
+}
+
+export function loadLocalStorage() {
+    updateToys()
+
+    if (filtersSettings.sort) {
+        const sort = Array.from(document.querySelectorAll(`.${CSS_CLASS.sortSelectionOption}`)) as HTMLOptionElement[]
+        sort.forEach(option => {
+            if (option.value === filtersSettings.sort) {
+                option.selected = true
+            }
+        })
+    }
+
+    if (filtersSettings.shape.length !== 0) {
+        const shapes = document.querySelectorAll(`.${CSS_CLASS.shapeToy}`)
+
+        shapes.forEach(toy => {
+            const name = toy.getAttribute('shape')
+            if (name) {
+                if (filtersSettings.shape.includes(name)) {
+                    toy.classList.add('active')
+                }
+            }
+
+        })
+    }
+
+    if (filtersSettings.color.length !== 0) {
+        const colors = document.querySelectorAll(`.${CSS_CLASS.colorsColor}`)
+
+        colors.forEach(color => {
+            const name = color.getAttribute('color')
+            if (name) {
+                if (filtersSettings.color.includes(name)) {
+                    color.classList.add('active')
+                }
+            }
+
+        })
+    }
+
+    if (filtersSettings.size.length !== 0) {
+        const sizes = Array.from(document.querySelectorAll(`input[name="size"]`)) as HTMLInputElement[]
+
+        sizes.forEach(size => {
+            const name = size.getAttribute('size')
+            if (name) {
+                if (filtersSettings.size.includes(name)) {
+                    size.checked = true
+                }
+            }
+
+        })
+    }
+
+    if (filtersSettings.popular) {
+        const popular = document.querySelector(`input[name="popular"]`) as HTMLInputElement
+        popular.checked = true
+    }
+    if (basket.size !== 0) {
+        const toys = document.querySelectorAll(`.${CSS_CLASS.toyCard}`)
+
+        toys.forEach(toy => {
+            const id = toy.getAttribute('id')
+
+            if (id) {
+                if (basket.has(id)) {
+                    toy.classList.add(`${CSS_CLASS.toyCardBasket}`)
+                }
+            }
+        })
+
+        changeNumberBasket()
+    }
+}
 
 export function resetFiltersPage(): void {
     const toysPage = document.querySelector('.toys-page')

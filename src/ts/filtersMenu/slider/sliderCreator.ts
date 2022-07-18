@@ -17,8 +17,8 @@ export class SliderCreator extends HTMLBuilder {
     constructor(nameSlider: string, min: number, max: number, step: number, textContent: string) {
         super();
         this.nameSlider = nameSlider;
-        this.min  = min;
-        this.max  = max;
+        this.min = min;
+        this.max = max;
         this.step = step;
         this.textContent = textContent;
     }
@@ -60,13 +60,36 @@ export class SliderCreator extends HTMLBuilder {
         positionsHandler.append(handlerOne, handlerSecond)
         sliderBlock.append(sliderName, slider, positionsHandler)
 
+        let minValue = this.min
+        let maxValue = this.max
+
+        if (this.nameSlider === 'quantity') {
+            if (filtersSettings.quantityMin !== -Infinity &&
+                filtersSettings.quantityMin) {
+                minValue = filtersSettings.quantityMin
+            }
+            if (filtersSettings.quantityMax !== Infinity&&
+                filtersSettings.quantityMax) {
+                maxValue = filtersSettings.quantityMax
+            }
+        } else if (this.nameSlider === 'years') {
+            if (filtersSettings.yearMin !== -Infinity &&
+                filtersSettings.yearMin) {
+                minValue = filtersSettings.yearMin
+            }
+            if (filtersSettings.yearMax !== Infinity &&
+                filtersSettings.yearMax) {
+                maxValue = filtersSettings.yearMax
+            }
+        }
+
         const ui: API = noUiSlider.create(slider, {
             range: {
                 'min': [this.min],
                 'max': [this.max],
             },
             step: this.step,
-            start: [this.min, this.max],
+            start: [minValue, maxValue],
             connect: true,
         });
 
@@ -74,10 +97,10 @@ export class SliderCreator extends HTMLBuilder {
             handlerOne.textContent = `${Number(values[0]).toFixed()}`
             handlerSecond.textContent = `${Number(values[1]).toFixed()}`
 
-            if(this.nameSlider === 'quantity') {
+            if (this.nameSlider === 'quantity') {
                 filtersSettings.quantityMin = +Number(values[0]).toFixed()
                 filtersSettings.quantityMax = +Number(values[1]).toFixed()
-            } else if(this.nameSlider === 'years') {
+            } else if (this.nameSlider === 'years') {
                 filtersSettings.yearMin = +Number(values[0]).toFixed()
                 filtersSettings.yearMax = +Number(values[1]).toFixed()
             }

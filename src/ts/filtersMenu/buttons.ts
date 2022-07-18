@@ -1,6 +1,7 @@
 import {HTMLBuilder} from "../HTMLBuilder";
-import {resetFiltersPage, resetFiltersSettings, setFiltersSettings} from "./filters-settings";
+import {loadLocalStorage, resetFiltersPage, resetFiltersSettings, setFiltersSettings} from "./filters-settings";
 import {ToysMenu} from "../toysCards/toys-menu";
+import {resetBasket} from "../basket";
 
 
 export class ButtonsSelector extends HTMLBuilder {
@@ -34,7 +35,11 @@ export class ButtonsSelector extends HTMLBuilder {
             if (searchField) {
                 searchField.value = ''
             }
+            loadLocalStorage()
+        })
 
+        clear.addEventListener('click', () => {
+            resetBasket()
         })
 
         wrapper.append(reset, clear)

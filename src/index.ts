@@ -2,7 +2,7 @@ import './styles/SCSS/main.scss';
 import {StartPage} from './ts/start-page';
 import {CreateToysPage}  from './ts/toys-page'
 import {href} from "./ts/enum";
-
+import {setFiltersSettings} from "./ts/filtersMenu/filters-settings";
 
 const startPage = new StartPage()
 startPage.init()
@@ -19,6 +19,13 @@ window.addEventListener('hashchange', () => {
     }
 })
 
-window.onload = () => window.location.hash = `#${href.startPage}`
+window.onload = () => {
+    window.location.hash = `#${href.startPage}`
+
+    const settings = localStorage.getItem('settings')
+    if(settings) {
+        setFiltersSettings(JSON.parse(settings))
+    }
+}
 
 

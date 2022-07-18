@@ -6,7 +6,7 @@ export class ColorSelector extends HTMLBuilder {
     create(): HTMLElement {
         const wrapper: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__color, color',
+            className: 'filters__color, colors',
         })
 
         const name: HTMLElement = this.createElement({
@@ -22,12 +22,12 @@ export class ColorSelector extends HTMLBuilder {
 
         const colors: HTMLElement[] = paramsToys.colors.map(color => this.createElement({
             tag: 'div',
-            className: `color__color, filters__color_${color?.en}, color__color_${color?.en}`,
+            className: `colors__color, filters__color_${color?.en}, colors__color_${color?.en}`,
             data: `color, ${color?.ru}`
         }))
 
         colorBlocks.addEventListener('click', (event) => {
-            const elem = (event.target as HTMLElement).closest('.color__color')
+            const elem = (event.target as HTMLElement).closest('.colors__color')
 
             if(!elem) return;
 

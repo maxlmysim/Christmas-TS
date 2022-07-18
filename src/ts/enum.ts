@@ -29,8 +29,9 @@ export enum CSS_CLASS {
     sortSelectionOption = 'sort__selection-option',
     toysCards = 'toys-cards',
     toyCard = 'toy-card',
+    toyCardBasket = 'toy-card__basket',
     toyCardName = 'toy-card__name',
-    toyCardImg ='toy-card__img',
+    toyCardImg = 'toy-card__img',
     toyCardQuantity = 'toy-card__quantity',
     toyCardYear = 'toy-card__year',
     toyCardShape = 'toy-card__shape',
@@ -50,7 +51,13 @@ export enum CSS_CLASS {
     sliderPositionsHandler = 'slider__positions-handler',
     sliderPositionsHandlerMax = 'slider__positions-handler_max',
     sliderPositionsHandlerMin = 'slider__positions-handler_min',
-    sliderRange = 'slider__range'
+    sliderRange = 'slider__range',
+    shapeToy = 'shape__toy',
+    colorsColor = 'colors__color',
+    basket = 'basket',
+    basketCount = 'basket__count',
+    popup = 'popup',
+    popupText = 'popup__text'
 }
 
 export enum href {

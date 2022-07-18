@@ -3,6 +3,9 @@ import {FiltersMenu} from "./filtersMenu/filters-menu";
 import {ToysMenu} from './toysCards/toys-menu'
 import {CSS_CLASS} from "./enum";
 import {SearchField} from "./search-field";
+import {loadLocalStorage} from "./filtersMenu/filters-settings";
+import {deleteSearchFieldAndBasket} from "./functions";
+import {Basket} from "./basket";
 
 export class CreateToysPage extends HTMLBuilder {
     init() {
@@ -17,7 +20,6 @@ export class CreateToysPage extends HTMLBuilder {
             className: CSS_CLASS.toysPage
         })
 
-
         const toysMenu = new ToysMenu()
         const filtersMenu = new FiltersMenu()
 
@@ -28,15 +30,13 @@ export class CreateToysPage extends HTMLBuilder {
             mainContainer.append(toysPage)
         }
 
+        deleteSearchFieldAndBasket()
+        const basket = new Basket()
         const searchField = new SearchField()
 
         const headerContainer: HTMLElement | null = document.querySelector('.header-container');
-        headerContainer?.append(searchField.create())
+        headerContainer?.append(searchField.create(), basket.create())
 
-        //
-        //
-        // window.addEventListener('click', () =>{
-        //     console.log(filtersSettings)
-        // })
+        loadLocalStorage()
     }
 }

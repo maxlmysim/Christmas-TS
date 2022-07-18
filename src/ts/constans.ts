@@ -1,4 +1,5 @@
 import {shapeTranslate, value} from "./enum";
+import {HTMLBuilder} from "./HTMLBuilder";
 
 export const filterSort = [
     {
@@ -35,3 +36,23 @@ export const filterShape = shapeTranslate.map(toy => {
 export const filtersColors = ['white', 'yellow', 'red', 'green', 'blue']
 
 export const filterSize = []
+
+export const capacityBasket = 20;
+
+export class NoResults extends HTMLBuilder {
+    create = () => {
+        const container = this.createElement({
+            tag: 'div',
+            className: 'no-results__container',
+        })
+
+        const text = this.createElement({
+            tag: 'p',
+            className: 'no-results__text',
+            textContent: 'Ничего не найдено'
+        })
+
+        container.append(text)
+        return container
+    }
+}
