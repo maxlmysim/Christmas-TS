@@ -3,23 +3,23 @@ import {CSS_CLASS, href} from "./enum";
 import {deleteSearchFieldAndBasket} from "./functions";
 
 export class StartPage extends HTMLBuilder {
-    init() {
-        const body = document.querySelector('body')
+    public init(): void {
+        const body: HTMLElement | null = document.querySelector('body')
         if (body) {
             body.className = CSS_CLASS.mainBackground
         }
 
-        const helpWindow = this.createElement({
+        const helpWindow: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.helpWindow
         })
-        const helpText = this.createElement({
+        const helpText: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.helpText,
             textContent: 'Выбери себе игрушки на елку'
         })
 
-        const startButton = this.createElement({
+        const startButton: HTMLElement = this.createElement({
             tag: 'a',
             className: CSS_CLASS.buttonStart,
             textContent: 'Начать',
@@ -29,7 +29,7 @@ export class StartPage extends HTMLBuilder {
         helpWindow.append(helpText)
 
         const mainContainer: HTMLElement | null = document.querySelector('.main-container');
-        const startPage = this.createElement({
+        const startPage: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.startPage
         })

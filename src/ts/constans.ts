@@ -1,7 +1,8 @@
-import {shapeTranslate, value} from "./enum";
+import {CSS_CLASS, shapeTranslate, value} from "./enum";
 import {HTMLBuilder} from "./HTMLBuilder";
+import {filterSortInterface} from "./interfaces";
 
-export const filterSort = [
+export const filterSort: filterSortInterface[] = [
     {
         value: value.base,
         textContent: 'Выберите сортировку',
@@ -33,22 +34,18 @@ export const filterShape = shapeTranslate.map(toy => {
     }
 })
 
-export const filtersColors = ['white', 'yellow', 'red', 'green', 'blue']
-
-export const filterSize = []
-
 export const capacityBasket = 20;
 
 export class NoResults extends HTMLBuilder {
-    create = () => {
-        const container = this.createElement({
+    public create = (): HTMLElement => {
+        const container: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'no-results__container',
+            className: CSS_CLASS.noResultsContainer,
         })
 
-        const text = this.createElement({
+        const text: HTMLElement = this.createElement({
             tag: 'p',
-            className: 'no-results__text',
+            className: CSS_CLASS.noResultsText,
             textContent: 'Ничего не найдено'
         })
 

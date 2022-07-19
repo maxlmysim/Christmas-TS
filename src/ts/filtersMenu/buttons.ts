@@ -2,31 +2,33 @@ import {HTMLBuilder} from "../HTMLBuilder";
 import {loadLocalStorage, resetFiltersPage, resetFiltersSettings, setFiltersSettings} from "./filters-settings";
 import {ToysMenu} from "../toysCards/toys-menu";
 import {resetBasket} from "../basket";
+import {classCreator, classInitiator} from "../interfaces";
+import {CSS_CLASS} from "../enum";
 
 
-export class ButtonsSelector extends HTMLBuilder {
-    create() {
+export class ButtonsSelector extends HTMLBuilder implements classCreator{
+    public create(): HTMLElement {
         const wrapper: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__buttons, buttons',
+            className: `${CSS_CLASS.filtersButtons}, ${CSS_CLASS.buttons}`,
         })
 
         const reset: HTMLElement = this.createElement({
             tag: 'button',
-            className: 'filters__button, filters__button-reset, buttons__reset',
+            className: `${CSS_CLASS.filtersButton}, ${CSS_CLASS.filtersButtonsReset}, ${CSS_CLASS.buttonsReset}`,
             textContent: 'сбросить фильтры'
         })
 
         const clear: HTMLElement = this.createElement({
             tag: 'button',
-            className: 'filters__button, filters__button-clear, buttons__clear',
+            className: `${CSS_CLASS.filtersButton}, ${CSS_CLASS.filtersButtonsClear}, ${CSS_CLASS.buttonsClear}`,
             textContent: 'очистить корзину'
         })
 
-        reset.addEventListener('click', () => {
+        reset.addEventListener('click', (): void => {
             setFiltersSettings({...resetFiltersSettings})
 
-            const pageToys = new ToysMenu()
+            const pageToys: classInitiator = new ToysMenu()
             pageToys.init()
 
             resetFiltersPage()

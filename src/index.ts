@@ -1,7 +1,7 @@
 import './styles/SCSS/main.scss';
 import {StartPage} from './ts/start-page';
-import {CreateToysPage}  from './ts/toys-page'
-import {href} from "./ts/enum";
+import {CreateToysPage} from './ts/toys-page'
+import {href, localStorageVariable} from "./ts/enum";
 import {setFiltersSettings} from "./ts/filtersMenu/filters-settings";
 import {showCurrentPage} from "./ts/functions";
 
@@ -10,7 +10,7 @@ startPage.init()
 
 const toysPage = new CreateToysPage()
 
-window.addEventListener('hashchange', () => {
+window.addEventListener('hashchange', (): void => {
     if (window.location.hash.slice(1) === href.startPage) {
         startPage.init()
         showCurrentPage('start')
@@ -23,11 +23,11 @@ window.addEventListener('hashchange', () => {
     }
 })
 
-window.onload = () => {
+window.onload = (): void => {
     window.location.hash = `#${href.startPage}`
 
-    const settings = localStorage.getItem('settings')
-    if(settings) {
+    const settings = localStorage.getItem(localStorageVariable.settings)
+    if (settings) {
         setFiltersSettings(JSON.parse(settings))
     }
 }

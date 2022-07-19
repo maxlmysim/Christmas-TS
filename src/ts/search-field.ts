@@ -1,11 +1,12 @@
 import {HTMLBuilder} from "./HTMLBuilder";
 import {filtersSettings, updateToys} from "./filtersMenu/filters-settings";
+import {CSS_CLASS} from "./enum";
 
 export class SearchField extends HTMLBuilder {
-    create() {
+    public create(): HTMLElement {
         const searchField = this.createElement({
             tag: 'input',
-            className: 'search-field',
+            className: CSS_CLASS.searchField,
             type: 'search',
             autofocus: true,
             placeholder: 'Поиск...'

@@ -1,41 +1,42 @@
 import {HTMLBuilder} from "../HTMLBuilder";
 import * as constants from "../constans";
 import {filtersSettings, updateToys} from "./filters-settings";
+import {CSS_CLASS, dataAttribute, pathTo} from "../enum";
 
 export class ShapeSelection extends HTMLBuilder {
-    create(): HTMLElement {
+    public create(): HTMLElement {
         const wrapper: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__shape, shape',
+            className: `${CSS_CLASS.filtersShape}, ${CSS_CLASS.shape}`,
         })
 
         const name: HTMLElement = this.createElement({
             tag: 'p',
-            className: 'shape__name, filter-name',
+            className: `${CSS_CLASS.shapeName}, ${CSS_CLASS.filterName}`,
             textContent: 'ФОРМА'
         })
 
         const shapeList: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'shape__list',
+            className: `${CSS_CLASS.shapeList}`,
         })
 
         shapeList.append(...constants.filterShape.map((elem) => {
-            const shape = this.createElement({
+            const shape: HTMLElement = this.createElement({
                 tag: 'div',
-                className: `shape__${elem.name}, shape__toy`,
-                data: `shape, ${elem.textContent}`
+                className: `${CSS_CLASS.shape}__${elem.name}, ${CSS_CLASS.shapeToy}`,
+                data: `${dataAttribute.shape}, ${elem.textContent}`
             })
 
-            const img = this.createElement({
+            const img: HTMLElement = this.createElement({
                 tag: 'div',
-                className: 'shape__img',
-                backgroundImage: `url(./assets/svg/${elem.name}.svg)`
+                className: CSS_CLASS.shapeImg,
+                backgroundImage: pathTo.getPathShapeImg(elem.name)
             })
 
-            const name = this.createElement({
+            const name: HTMLElement = this.createElement({
                 tag: 'p',
-                className: 'shape__name',
+                className: CSS_CLASS.shapeName,
                 textContent: elem.textContent,
             })
 
@@ -45,15 +46,15 @@ export class ShapeSelection extends HTMLBuilder {
         }))
 
         shapeList.addEventListener('click', event => {
-            const elem = (event.target as HTMLElement).closest('.shape__toy')
+            const elem: HTMLElement | null = (event.target as HTMLElement).closest('.shape__toy')
 
-            if(!elem) return;
+            if (!elem) return;
 
-            elem.classList.toggle('active')
-            const atr = elem.getAttribute('shape')
+            elem.classList.toggle(CSS_CLASS.active)
+            const atr: string | null = elem.getAttribute(dataAttribute.shape)
 
             if (atr) {
-                if (elem.classList.contains('active')) {
+                if (elem.classList.contains(CSS_CLASS.active)) {
                     filtersSettings.shape.push(atr)
                 } else {
                     filtersSettings.shape = filtersSettings.shape.filter(name => name !== atr)
@@ -62,7 +63,6 @@ export class ShapeSelection extends HTMLBuilder {
 
             updateToys()
         })
-
         wrapper.append(name, shapeList)
 
         return wrapper

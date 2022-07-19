@@ -7,15 +7,17 @@ import {ColorSelector} from "./color-selection";
 import {SizeSelector} from "./size-selection";
 import {PopularSelect} from "./popular-selection";
 import {ButtonsSelector} from "./buttons";
+import {classCreator} from "../interfaces";
+import {CSS_CLASS} from "../enum";
 
-export class FiltersMenu extends HTMLBuilder {
-    create() {
+export class FiltersMenu extends HTMLBuilder implements classCreator {
+    public create(): HTMLElement {
         const filtersMenu: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters-menu, filters'
+            className: `${CSS_CLASS.filtersMenu}, ${CSS_CLASS.filters}`
         })
 
-        const selectors = [new SortSelection(), new ShapeSelection(), new SliderQuantity(), new SliderYears(), new ColorSelector(), new SizeSelector(), new PopularSelect(), new ButtonsSelector()]
+        const selectors: classCreator[] = [new SortSelection(), new ShapeSelection(), new SliderQuantity(), new SliderYears(), new ColorSelector(), new SizeSelector(), new PopularSelect(), new ButtonsSelector()]
 
         filtersMenu.append(...selectors.map(selector => selector.create()))
 

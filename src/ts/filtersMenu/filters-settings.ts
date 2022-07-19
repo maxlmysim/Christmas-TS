@@ -1,12 +1,12 @@
-import {paramsFiltersSettings, paramsToy} from "../interfaces";
+import {classCreator, paramsFiltersSettings, paramsToy} from "../interfaces";
 import {FiltersMenu} from "./filters-menu";
 import data from "../../data/data";
 import {NoResults} from "../constans";
-import {CSS_CLASS} from "../enum";
+import {checkboxName, CSS_CLASS, dataAttribute, localStorageVariable, value} from "../enum";
 import {basket, changeNumberBasket} from "../basket";
 
 export let filtersSettings: paramsFiltersSettings = {
-    sort: 'sortNameDown',
+    sort: value.base,
     shape: [],
     quantityMin: -Infinity,
     quantityMax: Infinity,
@@ -24,7 +24,7 @@ export function setFiltersSettings(obj: paramsFiltersSettings): void {
 }
 
 export const resetFiltersSettings: paramsFiltersSettings = {
-    sort: 'sortNameDown',
+    sort: value.base,
     shape: [],
     quantityMin: -Infinity,
     quantityMax: Infinity,
@@ -72,11 +72,10 @@ function updateDataWithFiltersSettings(): paramsToy[] {
 export function updateToys(): void {
     saveLocalStorage()
     showAllCards()
-    const nodeCards = document.querySelectorAll('.toy-card')
-    if (!nodeCards) return
-    const ids = updateDataWithFiltersSettings().map(data => data.num);
-    const cardsHide = Array.from(nodeCards).filter(card => {
-        const id = card.getAttribute('id')
+    const nodeCards = Array.from(document.querySelectorAll(`.${CSS_CLASS.toyCard}`)) as HTMLElement[]
+    const ids: string[] = updateDataWithFiltersSettings().map(data => data.num);
+    const cardsHide: HTMLElement[] = nodeCards.filter(card => {
+        const id = card.getAttribute(dataAttribute.id)
 
         if (!id) {
             return
@@ -85,16 +84,16 @@ export function updateToys(): void {
         return !ids.includes(id)
     })
 
-    function animate(i: number) {
+    function animate(i: number): void {
         if (!cardsHide[i]) {
             return
         }
 
-        const card = cardsHide[i] as HTMLElement
-        card.classList.add('anim');
-        card.onanimationend = () => {
+        const card: HTMLElement = cardsHide[i]
+        card.classList.add(CSS_CLASS.anim);
+        card.onanimationend = (): void => {
             animate(i + 1)
-            card.classList.add('hide');
+            card.classList.add(CSS_CLASS.hide);
         }
     }
 
@@ -105,28 +104,27 @@ export function updateToys(): void {
     checkEmpty(nodeCards, cardsHide)
 }
 
-function showAllCards() {
-    const nodeCards = document.querySelectorAll('.toy-card')
-    Array.from(nodeCards).sort()
-    nodeCards.forEach(card => card.classList.remove('anim', 'hide'))
+function showAllCards(): void {
+    const nodeCards = Array.from(document.querySelectorAll('.toy-card')) as HTMLElement[]
+    nodeCards.forEach(card => card.classList.remove(CSS_CLASS.anim, CSS_CLASS.hide))
 }
 
-function checkEmpty(nodeCards: NodeList, cardsHide: Element[]) {
-    const place = document.querySelector('.no-results__container')
+function checkEmpty(nodeCards: HTMLElement[], cardsHide: Element[]): void {
+    const place: HTMLElement | null = document.querySelector('.no-results__container')
     place?.remove()
 
     if (nodeCards.length === cardsHide.length) {
-        const results = new NoResults()
-        const place = document.querySelector('.toys-cards')
+        const results: classCreator = new NoResults()
+        const place: HTMLElement | null = document.querySelector('.toys-cards')
         place?.append(results.create())
     }
 }
 
-function saveLocalStorage() {
-    localStorage.setItem('settings', JSON.stringify(filtersSettings))
+function saveLocalStorage(): void {
+    localStorage.setItem(localStorageVariable.settings, JSON.stringify(filtersSettings))
 }
 
-export function loadLocalStorage() {
+export function loadLocalStorage(): void {
     updateToys()
 
     if (filtersSettings.sort) {
@@ -139,56 +137,55 @@ export function loadLocalStorage() {
     }
 
     if (filtersSettings.shape.length !== 0) {
-        const shapes = document.querySelectorAll(`.${CSS_CLASS.shapeToy}`)
+        const shapes = Array.from(document.querySelectorAll(`.${CSS_CLASS.shapeToy}`)) as HTMLElement[]
 
         shapes.forEach(toy => {
-            const name = toy.getAttribute('shape')
+            const name: string | null = toy.getAttribute(dataAttribute.shape)
             if (name) {
                 if (filtersSettings.shape.includes(name)) {
-                    toy.classList.add('active')
+                    toy.classList.add(CSS_CLASS.active)
                 }
             }
-
         })
     }
 
     if (filtersSettings.color.length !== 0) {
-        const colors = document.querySelectorAll(`.${CSS_CLASS.colorsColor}`)
+        const colors = Array.from(document.querySelectorAll(`.${CSS_CLASS.colorsColor}`)) as HTMLElement[]
 
         colors.forEach(color => {
-            const name = color.getAttribute('color')
+            const name: string | null = color.getAttribute(dataAttribute.color)
             if (name) {
                 if (filtersSettings.color.includes(name)) {
-                    color.classList.add('active')
+                    color.classList.add(CSS_CLASS.active)
                 }
             }
-
         })
     }
 
     if (filtersSettings.size.length !== 0) {
-        const sizes = Array.from(document.querySelectorAll(`input[name="size"]`)) as HTMLInputElement[]
+        const sizes = Array.from(document.querySelectorAll(`input[name=${checkboxName.size}]`)) as HTMLInputElement[]
 
         sizes.forEach(size => {
-            const name = size.getAttribute('size')
+            const name: string | null = size.getAttribute(dataAttribute.size)
             if (name) {
                 if (filtersSettings.size.includes(name)) {
                     size.checked = true
                 }
             }
-
         })
     }
 
     if (filtersSettings.popular) {
-        const popular = document.querySelector(`input[name="popular"]`) as HTMLInputElement
-        popular.checked = true
+        const popular = document.querySelector(`input[name=${checkboxName.popular}]`) as HTMLInputElement | null
+        if (popular) {
+            popular.checked = true
+        }
     }
     if (basket.size !== 0) {
-        const toys = document.querySelectorAll(`.${CSS_CLASS.toyCard}`)
+        const toys = Array.from(document.querySelectorAll(`.${CSS_CLASS.toyCard}`)) as HTMLInputElement[]
 
         toys.forEach(toy => {
-            const id = toy.getAttribute('id')
+            const id: string | null = toy.getAttribute(dataAttribute.id)
 
             if (id) {
                 if (basket.has(id)) {
@@ -196,48 +193,47 @@ export function loadLocalStorage() {
                 }
             }
         })
-
         changeNumberBasket()
     }
 }
 
 export function resetFiltersPage(): void {
-    const toysPage = document.querySelector('.toys-page')
+    const toysPage = document.querySelector('.toys-page') as HTMLElement | null
     document.querySelector('.filters-menu')?.remove()
     toysPage?.append((new FiltersMenu()).create())
 }
 
-export function sortSelection(newData: paramsToy[]) {
-    if (filtersSettings.sort === 'sortNameDown') {
+export function sortSelection(newData: paramsToy[]): paramsToy[] {
+    if (filtersSettings.sort === value.sortNameDown) {
         newData.sort((toy1, toy2) => toy1.name.localeCompare(toy2.name))
-    } else if (filtersSettings.sort === 'sortNameUp') {
+    } else if (filtersSettings.sort === value.sortNameUp) {
         newData.sort((toy1, toy2) => toy2.name.localeCompare(toy1.name))
-    } else if (filtersSettings.sort === 'sortDateDown') {
+    } else if (filtersSettings.sort === value.sortDateDown) {
         newData.sort((toy1, toy2) => Number(toy1.year) - Number(toy2.year))
-    } else if (filtersSettings.sort === 'sortDateUp') {
+    } else if (filtersSettings.sort === value.sortDateUp) {
         newData.sort((toy1, toy2) => Number(toy2.year) - Number(toy1.year))
     }
     return newData
 }
 
-const shapeSelection = (newData: paramsToy[]) => newData.filter(toy => filtersSettings.shape.includes(toy.shape))
+const shapeSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.shape.includes(toy.shape))
 
-const quantitySelection = (newData: paramsToy[]) => {
+const quantitySelection = (newData: paramsToy[]): paramsToy[] => {
     newData = newData.filter(toy => +toy.count >= filtersSettings.quantityMin &&
         +toy.count <= filtersSettings.quantityMax)
     return newData
 }
 
-const yearSelection = (newData: paramsToy[]) => {
+const yearSelection = (newData: paramsToy[]): paramsToy[] => {
     newData = newData.filter(toy => +toy.year >= filtersSettings.yearMin &&
         +toy.year <= filtersSettings.yearMax)
     return newData
 }
 
-const colorSelection = (newData: paramsToy[]) => newData.filter(toy => filtersSettings.color.includes(toy.color))
+const colorSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.color.includes(toy.color))
 
-const sizeSelection = (newData: paramsToy[]) => newData.filter(toy => filtersSettings.size.includes(toy.size))
+const sizeSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.size.includes(toy.size))
 
-const popularSelection = (newData: paramsToy[]) => newData.filter(toy => toy.favorite)
+const popularSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => toy.favorite)
 
-export const searchToys = (newData: paramsToy[]) => newData.filter(toy => toy.name.toLowerCase().includes(filtersSettings.search.toLowerCase()))
+export const searchToys = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => toy.name.toLowerCase().includes(filtersSettings.search.toLowerCase()))

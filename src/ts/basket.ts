@@ -1,53 +1,15 @@
 import {HTMLBuilder} from "./HTMLBuilder";
-import {CSS_CLASS} from "./enum";
-
-let basketFromLocalStorage = localStorage.getItem('basket')
-if (basketFromLocalStorage) {
-    basketFromLocalStorage = JSON.parse(basketFromLocalStorage)
-}
-
-export const basket = new Set(basketFromLocalStorage)
-
-export function resetBasket() {
-    basket.clear()
-    changeNumberBasket()
-    const activeToys = document.querySelectorAll(`.${CSS_CLASS.toyCardBasket}`)
-
-    activeToys.forEach(toy => toy.classList.remove(CSS_CLASS.toyCardBasket))
-}
-
-export function showMaxCapacityBasket(event: MouseEvent) {
-    const popup = (new FullBasket()).create()
-    popup.style.top = `${event.clientY}px`
-    popup.style.left = `${event.clientX}px`
-
-    document.body.append(popup)
-
-    setTimeout(() => popup.remove(), 1000)
-}
-
-export function changeNumberBasket() {
-    const num = document.querySelector(`.${CSS_CLASS.basketCount}`)
-    if (num) {
-        num.textContent = `${basket.size}`
-    }
-    saveLocalStorage()
-}
-
-function saveLocalStorage() {
-    const arr = Array.from(basket)
-    localStorage.setItem('basket', JSON.stringify(arr))
-}
+import {CSS_CLASS, localStorageVariable, pathTo} from "./enum";
 
 export class Basket extends HTMLBuilder {
-    create() {
-        const basket = this.createElement({
+    public create(): HTMLElement {
+        const basket: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.basket,
-            backgroundImage: 'url(./assets/svg/ball.svg)'
+            backgroundImage: pathTo.getPathBasketImg()
         })
 
-        const count = this.createElement({
+        const count: HTMLElement = this.createElement({
             tag: 'p',
             className: CSS_CLASS.basketCount,
             textContent: '0'
@@ -60,13 +22,13 @@ export class Basket extends HTMLBuilder {
 }
 
 class FullBasket extends HTMLBuilder {
-    create() {
-        const popup = this.createElement({
+    public create(): HTMLElement {
+        const popup: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.popup
         })
 
-        const text = this.createElement({
+        const text: HTMLElement = this.createElement({
             tag: 'p',
             className: CSS_CLASS.popupText,
             textContent: 'Извините, корзина полна'
@@ -76,4 +38,45 @@ class FullBasket extends HTMLBuilder {
 
         return popup
     }
+}
+
+
+let basketFromLocalStorage: string | null = localStorage.getItem(localStorageVariable.basket)
+if (basketFromLocalStorage) {
+    basketFromLocalStorage = JSON.parse(basketFromLocalStorage)
+}
+
+export const basket: Set<string> = new Set(basketFromLocalStorage)
+
+export function resetBasket(): void {
+    basket.clear()
+    changeNumberBasket()
+    const activeToys = Array.from(document.querySelectorAll(`.${CSS_CLASS.toyCardBasket}`)) as HTMLElement[]
+
+    activeToys.forEach(toy => toy.classList.remove(CSS_CLASS.toyCardBasket))
+}
+
+export function showMaxCapacityBasket(event: MouseEvent): void {
+    const popup: HTMLElement = (new FullBasket()).create()
+    popup.style.top = `${event.clientY}px`
+    popup.style.left = `${event.clientX}px`
+
+    if (!document.querySelector('.popup')) {
+        document.body.append(popup)
+
+        setTimeout(() => popup.remove(), 1000)
+    }
+}
+
+export function changeNumberBasket(): void {
+    const num: HTMLElement | null = document.querySelector(`.${CSS_CLASS.basketCount}`)
+    if (num) {
+        num.textContent = `${basket.size}`
+    }
+    saveLocalStorage()
+}
+
+function saveLocalStorage(): void {
+    const arr: string[] = Array.from(basket)
+    localStorage.setItem(localStorageVariable.basket, JSON.stringify(arr))
 }

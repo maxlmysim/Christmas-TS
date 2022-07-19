@@ -1,7 +1,7 @@
 import {createElementParams} from "./interfaces";
 
 export class HTMLBuilder {
-    createElement(params: createElementParams): HTMLElement {
+   protected createElement(params: createElementParams): HTMLElement {
         const elem: HTMLElement = document.createElement(params.tag)
 
         if (params.className) {

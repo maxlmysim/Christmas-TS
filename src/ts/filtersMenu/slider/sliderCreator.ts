@@ -4,17 +4,12 @@ import '../../../styles/SCSS/components/_sliders.scss';
 import {HTMLBuilder} from '../../HTMLBuilder';
 import {API} from "nouislider";
 import {filtersSettings, updateToys} from "../filters-settings";
-import {CSS_CLASS} from "../../enum";
+import {CSS_CLASS, sliderParams} from "../../enum";
+import {classCreator} from "../../interfaces";
 
 
-export class SliderCreator extends HTMLBuilder {
-    nameSlider: string;
-    min: number;
-    max: number;
-    step: number;
-    textContent: string;
-
-    constructor(nameSlider: string, min: number, max: number, step: number, textContent: string) {
+export class SliderCreator extends HTMLBuilder implements classCreator{
+    protected constructor(protected nameSlider: string, protected min: number, protected max: number, protected step: number, protected textContent: string) {
         super();
         this.nameSlider = nameSlider;
         this.min = min;
@@ -23,30 +18,30 @@ export class SliderCreator extends HTMLBuilder {
         this.textContent = textContent;
     }
 
-    create() {
-        const sliderBlock = this.createElement({
+    public create(): HTMLElement {
+        const sliderBlock: HTMLElement = this.createElement({
             tag: 'div',
             className: `${CSS_CLASS.filtersSlider}-${this.nameSlider}, ${CSS_CLASS.slider}`,
         })
 
-        const sliderName = this.createElement({
+        const sliderName: HTMLElement = this.createElement({
             tag: 'p',
             className: `${CSS_CLASS.sliderName}, ${CSS_CLASS.filterName}`,
             textContent: this.textContent
         })
 
-        const positionsHandler = this.createElement({
+        const positionsHandler: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.sliderPositionsHandler,
         })
 
-        const handlerOne = this.createElement({
+        const handlerOne: HTMLElement = this.createElement({
             tag: 'p',
             className: CSS_CLASS.sliderPositionsHandlerMin,
             textContent: `${this.min}`
         })
 
-        const handlerSecond = this.createElement({
+        const handlerSecond: HTMLElement = this.createElement({
             tag: 'p',
             className: CSS_CLASS.sliderPositionsHandlerMax,
             textContent: `${this.max}`
@@ -60,19 +55,19 @@ export class SliderCreator extends HTMLBuilder {
         positionsHandler.append(handlerOne, handlerSecond)
         sliderBlock.append(sliderName, slider, positionsHandler)
 
-        let minValue = this.min
-        let maxValue = this.max
+        let minValue: number = this.min
+        let maxValue: number = this.max
 
-        if (this.nameSlider === 'quantity') {
+        if (this.nameSlider === sliderParams.quantity.name) {
             if (filtersSettings.quantityMin !== -Infinity &&
                 filtersSettings.quantityMin) {
                 minValue = filtersSettings.quantityMin
             }
-            if (filtersSettings.quantityMax !== Infinity&&
+            if (filtersSettings.quantityMax !== Infinity &&
                 filtersSettings.quantityMax) {
                 maxValue = filtersSettings.quantityMax
             }
-        } else if (this.nameSlider === 'years') {
+        } else if (this.nameSlider === sliderParams.years.name) {
             if (filtersSettings.yearMin !== -Infinity &&
                 filtersSettings.yearMin) {
                 minValue = filtersSettings.yearMin
@@ -97,10 +92,10 @@ export class SliderCreator extends HTMLBuilder {
             handlerOne.textContent = `${Number(values[0]).toFixed()}`
             handlerSecond.textContent = `${Number(values[1]).toFixed()}`
 
-            if (this.nameSlider === 'quantity') {
+            if (this.nameSlider === sliderParams.quantity.name) {
                 filtersSettings.quantityMin = +Number(values[0]).toFixed()
                 filtersSettings.quantityMax = +Number(values[1]).toFixed()
-            } else if (this.nameSlider === 'years') {
+            } else if (this.nameSlider === sliderParams.years.name) {
                 filtersSettings.yearMin = +Number(values[0]).toFixed()
                 filtersSettings.yearMax = +Number(values[1]).toFixed()
             }

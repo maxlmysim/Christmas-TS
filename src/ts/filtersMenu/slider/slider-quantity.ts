@@ -1,13 +1,11 @@
 import {SliderCreator} from "./sliderCreator";
 import {paramsToys} from "../../params-toys";
-// import {filtersSettings} from "../filters-settings";
+import {sliderParams} from "../../enum";
 
 
 export class SliderQuantity extends SliderCreator {
-    constructor() {
-        super('quantity', paramsToys.minCount, paramsToys.maxCount, 1, 'Количество экземпляров');
+    public constructor() {
+        super(sliderParams.quantity.name, paramsToys.minCount, paramsToys.maxCount, +sliderParams.quantity.step, sliderParams.quantity.text);
     }
-
-
 }
 

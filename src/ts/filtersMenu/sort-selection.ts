@@ -1,12 +1,12 @@
 import {HTMLBuilder} from '../HTMLBuilder'
 import * as constants from '../constans'
-import {paramsFilterSort} from "../interfaces";
+import {classInitiator, paramsFilterSort} from "../interfaces";
 import {filtersSettings, updateToys} from "./filters-settings";
 import {ToysMenu} from "../toysCards/toys-menu";
 import {CSS_CLASS} from "../enum";
 
 export class SortSelection extends HTMLBuilder {
-    create() {
+    public create(): HTMLElement {
         const wrapper: HTMLElement = this.createElement({
             tag: 'div',
             className: `${CSS_CLASS.filtersSort}, ${CSS_CLASS.sort}`,
@@ -23,7 +23,7 @@ export class SortSelection extends HTMLBuilder {
             className: CSS_CLASS.sortSelection,
         })
 
-        selection.append(...constants.filterSort.map((elem: paramsFilterSort) => {
+        selection.append(...constants.filterSort.map((elem: paramsFilterSort): HTMLElement => {
             return this.createElement({
                 tag: 'option',
                 className: CSS_CLASS.sortSelectionOption,
@@ -37,7 +37,7 @@ export class SortSelection extends HTMLBuilder {
         selection.addEventListener('change', event => {
             filtersSettings.sort = (event.target as HTMLInputElement).value
 
-            const pageToys = new ToysMenu()
+            const pageToys: classInitiator = new ToysMenu()
             pageToys.init()
 
             updateToys()

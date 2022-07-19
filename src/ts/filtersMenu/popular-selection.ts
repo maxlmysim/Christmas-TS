@@ -1,28 +1,29 @@
 import {HTMLBuilder} from "../HTMLBuilder";
 import {filtersSettings, updateToys} from "./filters-settings";
+import {checkboxName, CSS_CLASS} from "../enum";
 
 export class PopularSelect extends HTMLBuilder {
-    create(): HTMLElement {
+   public create(): HTMLElement {
         const wrapper: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__popular, popular',
+            className: `${CSS_CLASS.filtersPopular}, ${CSS_CLASS.popular}`,
         })
 
-        const container = this.createElement({
+        const container: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'checkbox-container',
+            className: `${CSS_CLASS.checkboxContainer}`,
         })
 
-        const input = this.createElement({
+        const input: HTMLElement = this.createElement({
             tag: 'input',
             className: '',
             type: 'checkbox',
-            value: 'popular',
+            value: checkboxName.popular,
             id: 'popular',
-            name: 'popular',
+            name: checkboxName.popular,
         })
 
-        const label = this.createElement({
+        const label: HTMLElement = this.createElement({
             tag: 'label',
             className: '',
             textContent: 'Популярные',

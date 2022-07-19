@@ -1,29 +1,31 @@
 import {HTMLBuilder} from "../HTMLBuilder";
 import {paramsToys} from "../params-toys";
 import {filtersSettings, updateToys} from "./filters-settings";
+import {classCreator} from "../interfaces";
+import {CSS_CLASS, dataAttribute} from "../enum";
 
-export class ColorSelector extends HTMLBuilder {
-    create(): HTMLElement {
+export class ColorSelector extends HTMLBuilder implements classCreator{
+   public create(): HTMLElement {
         const wrapper: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__color, colors',
+            className: `${CSS_CLASS.filtersColor}, ${CSS_CLASS.colors}`,
         })
 
         const name: HTMLElement = this.createElement({
             tag: 'p',
-            className: 'color__name, filter-name',
+            className: `${CSS_CLASS.colorName}, ${CSS_CLASS.filterName}`,
             textContent: 'Цвет'
         })
 
         const colorBlocks: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__color-container'
+            className: `${CSS_CLASS.filtersColorContainer}`
         })
 
         const colors: HTMLElement[] = paramsToys.colors.map(color => this.createElement({
             tag: 'div',
-            className: `colors__color, filters__color_${color?.en}, colors__color_${color?.en}`,
-            data: `color, ${color?.ru}`
+            className: `${CSS_CLASS.colorsColor}, ${CSS_CLASS.filtersColor}_${color?.en}, ${CSS_CLASS.colorsColor}_${color?.en}`,
+            data: `${dataAttribute.color}, ${color?.ru}`
         }))
 
         colorBlocks.addEventListener('click', (event) => {
@@ -31,11 +33,11 @@ export class ColorSelector extends HTMLBuilder {
 
             if(!elem) return;
 
-            elem.classList.toggle('active')
-            const atr = elem.getAttribute('color')
+            elem.classList.toggle(CSS_CLASS.active)
+            const atr = elem.getAttribute(dataAttribute.color)
 
             if (atr) {
-                if (elem?.classList.contains('active')) {
+                if (elem?.classList.contains(CSS_CLASS.active)) {
                     filtersSettings.color.push(atr)
                 } else {
                     filtersSettings.color = filtersSettings.color.filter(name => name !== atr)

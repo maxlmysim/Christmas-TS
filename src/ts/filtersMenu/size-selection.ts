@@ -1,42 +1,43 @@
 import {HTMLBuilder} from "../HTMLBuilder";
 import {paramsToys} from "../params-toys";
 import {filtersSettings, updateToys} from "./filters-settings";
+import {checkboxName, CSS_CLASS, dataAttribute} from "../enum";
 
 export class SizeSelector extends HTMLBuilder {
-    create(): HTMLElement {
+    public create(): HTMLElement {
         const wrapper: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__size, size',
+            className: `${CSS_CLASS.filtersSize}, ${CSS_CLASS.size}`,
         })
 
         const name: HTMLElement = this.createElement({
             tag: 'p',
-            className: 'size__name, filter-name',
+            className: `${CSS_CLASS.sizeName}, ${CSS_CLASS.filterName}`,
             textContent: 'Размер'
         })
 
         const sizeContainer: HTMLElement = this.createElement({
             tag: 'div',
-            className: 'filters__size-container'
+            className: `${CSS_CLASS.filtersSizeContainer}`
         })
 
         const sizes: HTMLElement[] = paramsToys.size.map(size => {
-            const container = this.createElement({
+            const container: HTMLElement = this.createElement({
                 tag: 'div',
-                className: 'checkbox-container',
+                className: `${CSS_CLASS.checkboxContainer}`,
             })
 
-            const input = this.createElement({
+            const input: HTMLElement = this.createElement({
                 tag: 'input',
                 className: '',
                 type: 'checkbox',
-                name: 'size',
+                name: checkboxName.size,
                 value: size?.en,
                 id: size?.en,
-                data: `size, ${size?.ru}`,
+                data: `${dataAttribute.size}, ${size?.ru}`,
             })
 
-            const label = this.createElement( {
+            const label: HTMLElement = this.createElement({
                 tag: 'label',
                 className: '',
                 for: size?.en,
@@ -49,12 +50,12 @@ export class SizeSelector extends HTMLBuilder {
 
         sizeContainer.append(...sizes)
 
-        sizeContainer.addEventListener('change', (event) =>{
+        sizeContainer.addEventListener('change', (event) => {
             const elem: HTMLInputElement | null = (event.target as HTMLElement).closest("input[name=size]")
 
-            if(!elem) return;
+            if (!elem) return;
 
-            const atr = elem.getAttribute('size')
+            const atr: string | null = elem.getAttribute(dataAttribute.size)
 
             if (atr) {
                 if (elem.checked) {
@@ -67,7 +68,7 @@ export class SizeSelector extends HTMLBuilder {
             updateToys()
         })
 
-        wrapper.append(name,sizeContainer)
+        wrapper.append(name, sizeContainer)
 
         return wrapper
     }

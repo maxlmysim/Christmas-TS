@@ -6,10 +6,11 @@ import {SearchField} from "./search-field";
 import {loadLocalStorage} from "./filtersMenu/filters-settings";
 import {deleteSearchFieldAndBasket} from "./functions";
 import {Basket} from "./basket";
+import {classCreator} from "./interfaces";
 
 export class CreateToysPage extends HTMLBuilder {
-    init() {
-        const body = document.querySelector('body')
+    public init(): void {
+        const body: HTMLElement | null = document.querySelector('body')
         if (body) {
             body.className = CSS_CLASS.toysPageFilters
         }
@@ -20,8 +21,8 @@ export class CreateToysPage extends HTMLBuilder {
             className: CSS_CLASS.toysPage
         })
 
-        const toysMenu = new ToysMenu()
-        const filtersMenu = new FiltersMenu()
+        const toysMenu: classCreator = new ToysMenu()
+        const filtersMenu: classCreator = new FiltersMenu()
 
         toysPage.append(filtersMenu.create(), toysMenu.create())
 
@@ -31,8 +32,8 @@ export class CreateToysPage extends HTMLBuilder {
         }
 
         deleteSearchFieldAndBasket()
-        const basket = new Basket()
-        const searchField = new SearchField()
+        const basket: classCreator = new Basket()
+        const searchField: classCreator = new SearchField()
 
         const headerContainer: HTMLElement | null = document.querySelector('.header-container');
         headerContainer?.append(searchField.create(), basket.create())

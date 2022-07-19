@@ -2,11 +2,11 @@ import data from "../../data/data";
 import {HTMLBuilder} from "../HTMLBuilder";
 import {paramsToy} from "../interfaces"
 import {sortSelection} from "../filtersMenu/filters-settings";
-import {CSS_CLASS, dataAttribute} from "../enum";
+import {CSS_CLASS, dataAttribute, pathTo} from "../enum";
 
 
 class ToyCardCreator extends HTMLBuilder {
-    createCard(paramsToy: paramsToy) {
+    protected createCard(paramsToy: paramsToy): HTMLElement {
         const card: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.toyCard,
@@ -26,9 +26,8 @@ class ToyCardCreator extends HTMLBuilder {
         const cardImg: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.toyCardImg,
-            backgroundImage: `url(./assets/toys/${paramsToy.num}.png)`
+            backgroundImage: pathTo.getPathCardImg(paramsToy.num)
         })
-
 
         const cardQuantity: HTMLElement = this.createElement({
             tag: 'p',
@@ -73,7 +72,7 @@ class ToyCardCreator extends HTMLBuilder {
 }
 
 export class ToyCardsCreator extends ToyCardCreator {
-    createListCards() {
+    public createListCards(): HTMLElement[] {
         const sortData = sortSelection(data)
         return sortData.map(toy => this.createCard(toy))
     }

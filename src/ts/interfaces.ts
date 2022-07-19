@@ -53,3 +53,21 @@ export interface paramsFiltersSettings {
     basket: string[]
 }
 
+export interface classCreator {
+    create(): HTMLElement
+}
+
+export interface classInitiator {
+    init(): void
+}
+
+export interface createElement {
+    createElement(params: createElementParams): HTMLElement
+}
+
+export interface filterSortInterface {
+    value: string,
+    textContent: string,
+    disabled?: boolean,
+    selected?: boolean
+}
