@@ -4,7 +4,7 @@ import '../../../styles/SCSS/components/_sliders.scss';
 import {HTMLBuilder} from '../../HTMLBuilder';
 import {API} from "nouislider";
 import {filtersSettings, updateToys} from "../filters-settings";
-import {CSS_CLASS, sliderParams} from "../../enum";
+import {CSS_CLASS, sliderParams} from "../../settings";
 import {classCreator} from "../../interfaces";
 
 

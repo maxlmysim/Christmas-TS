@@ -1,7 +1,6 @@
 import {HTMLBuilder} from "../HTMLBuilder";
-import * as constants from "../constans";
 import {filtersSettings, updateToys} from "./filters-settings";
-import {CSS_CLASS, dataAttribute, pathTo} from "../enum";
+import {CSS_CLASS, dataAttribute, filterShape, pathTo} from "../settings";
 
 export class ShapeSelection extends HTMLBuilder {
     public create(): HTMLElement {
@@ -21,7 +20,7 @@ export class ShapeSelection extends HTMLBuilder {
             className: `${CSS_CLASS.shapeList}`,
         })
 
-        shapeList.append(...constants.filterShape.map((elem) => {
+        shapeList.append(...filterShape.map((elem) => {
             const shape: HTMLElement = this.createElement({
                 tag: 'div',
                 className: `${CSS_CLASS.shape}__${elem.name}, ${CSS_CLASS.shapeToy}`,

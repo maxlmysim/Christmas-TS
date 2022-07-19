@@ -1,6 +1,5 @@
 import {SliderCreator} from "./sliderCreator";
-import {paramsToys} from "../../params-toys";
-import {sliderParams} from "../../enum";
+import {paramsToys, sliderParams} from "../../settings";
 
 export class SliderYears extends SliderCreator {
     public constructor() {

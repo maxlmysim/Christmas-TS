@@ -1,9 +1,9 @@
 import './styles/SCSS/main.scss';
 import {StartPage} from './ts/start-page';
 import {CreateToysPage} from './ts/toys-page'
-import {href, localStorageVariable} from "./ts/enum";
+import {href, localStorageVariable} from "./ts/settings";
 import {setFiltersSettings} from "./ts/filtersMenu/filters-settings";
-import {showCurrentPage} from "./ts/functions";
+import {highlightCurrentPage} from "./ts/functions";
 
 const startPage = new StartPage()
 startPage.init()
@@ -13,12 +13,12 @@ const toysPage = new CreateToysPage()
 window.addEventListener('hashchange', (): void => {
     if (window.location.hash.slice(1) === href.startPage) {
         startPage.init()
-        showCurrentPage('start')
+        highlightCurrentPage('start')
     } else if (window.location.hash.slice(1) === href.toysPage) {
-        showCurrentPage('toys')
+        highlightCurrentPage('toys')
         toysPage.init()
     } else if (window.location.hash.slice(1) === href.treePage) {
-        showCurrentPage('toys')
+        highlightCurrentPage('toys')
         toysPage.init()
     }
 })

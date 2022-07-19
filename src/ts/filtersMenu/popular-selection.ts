@@ -1,6 +1,6 @@
 import {HTMLBuilder} from "../HTMLBuilder";
 import {filtersSettings, updateToys} from "./filters-settings";
-import {checkboxName, CSS_CLASS} from "../enum";
+import {checkboxName, CSS_CLASS} from "../settings";
 
 export class PopularSelect extends HTMLBuilder {
    public create(): HTMLElement {

@@ -8,7 +8,7 @@ import {SizeSelector} from "./size-selection";
 import {PopularSelect} from "./popular-selection";
 import {ButtonsSelector} from "./buttons";
 import {classCreator} from "../interfaces";
-import {CSS_CLASS} from "../enum";
+import {CSS_CLASS} from "../settings";
 
 export class FiltersMenu extends HTMLBuilder implements classCreator {
     public create(): HTMLElement {

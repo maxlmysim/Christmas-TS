@@ -1,9 +1,9 @@
 import {classCreator, paramsFiltersSettings, paramsToy} from "../interfaces";
 import {FiltersMenu} from "./filters-menu";
 import data from "../../data/data";
-import {NoResults} from "../constans";
-import {checkboxName, CSS_CLASS, dataAttribute, localStorageVariable, value} from "../enum";
-import {basket, changeNumberBasket} from "../basket";
+import {checkboxName, CSS_CLASS, dataAttribute, localStorageVariable, value} from "../settings";
+import {basket, changeNumberBasket} from "../elements/basket";
+import {NoResults} from "../toysCards/noResults";
 
 export let filtersSettings: paramsFiltersSettings = {
     sort: value.base,

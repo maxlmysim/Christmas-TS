@@ -1,7 +1,6 @@
 import {HTMLBuilder} from "../HTMLBuilder";
-import {paramsToys} from "../params-toys";
 import {filtersSettings, updateToys} from "./filters-settings";
-import {checkboxName, CSS_CLASS, dataAttribute} from "../enum";
+import {checkboxName, CSS_CLASS, dataAttribute, paramsToys} from "../settings";
 
 export class SizeSelector extends HTMLBuilder {
     public create(): HTMLElement {

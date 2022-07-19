@@ -1,9 +1,9 @@
 import {HTMLBuilder} from "../HTMLBuilder";
 import {loadLocalStorage, resetFiltersPage, resetFiltersSettings, setFiltersSettings} from "./filters-settings";
 import {ToysMenu} from "../toysCards/toys-menu";
-import {resetBasket} from "../basket";
+import {resetBasket} from "../elements/basket";
 import {classCreator, classInitiator} from "../interfaces";
-import {CSS_CLASS} from "../enum";
+import {CSS_CLASS} from "../settings";
 
 
 export class ButtonsSelector extends HTMLBuilder implements classCreator{

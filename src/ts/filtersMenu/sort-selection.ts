@@ -1,9 +1,8 @@
 import {HTMLBuilder} from '../HTMLBuilder'
-import * as constants from '../constans'
 import {classInitiator, paramsFilterSort} from "../interfaces";
 import {filtersSettings, updateToys} from "./filters-settings";
 import {ToysMenu} from "../toysCards/toys-menu";
-import {CSS_CLASS} from "../enum";
+import {CSS_CLASS, filterSort} from "../settings";
 
 export class SortSelection extends HTMLBuilder {
     public create(): HTMLElement {
@@ -23,7 +22,7 @@ export class SortSelection extends HTMLBuilder {
             className: CSS_CLASS.sortSelection,
         })
 
-        selection.append(...constants.filterSort.map((elem: paramsFilterSort): HTMLElement => {
+        selection.append(...filterSort.map((elem: paramsFilterSort): HTMLElement => {
             return this.createElement({
                 tag: 'option',
                 className: CSS_CLASS.sortSelectionOption,

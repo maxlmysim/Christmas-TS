@@ -1,8 +1,7 @@
 import {HTMLBuilder} from "../HTMLBuilder";
 import {ToyCardsCreator} from "./toy-cards-creator";
-import {CSS_CLASS, dataAttribute} from "../enum";
-import {basket, changeNumberBasket, showMaxCapacityBasket} from "../basket";
-import {capacityBasket} from "../constans";
+import {capacityBasket, CSS_CLASS, dataAttribute} from "../settings";
+import {basket, changeNumberBasket, showMaxCapacityBasket} from "../elements/basket";
 import {classCreator, classInitiator} from "../interfaces";
 
 export class ToysMenu extends HTMLBuilder implements classInitiator, classCreator {

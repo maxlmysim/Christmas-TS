@@ -1,8 +1,7 @@
 import {HTMLBuilder} from "../HTMLBuilder";
-import {paramsToys} from "../params-toys";
 import {filtersSettings, updateToys} from "./filters-settings";
 import {classCreator} from "../interfaces";
-import {CSS_CLASS, dataAttribute} from "../enum";
+import {CSS_CLASS, dataAttribute, paramsToys} from "../settings";
 
 export class ColorSelector extends HTMLBuilder implements classCreator{
    public create(): HTMLElement {

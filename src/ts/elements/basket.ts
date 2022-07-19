@@ -1,5 +1,5 @@
-import {HTMLBuilder} from "./HTMLBuilder";
-import {CSS_CLASS, localStorageVariable, pathTo} from "./enum";
+import {HTMLBuilder} from "../HTMLBuilder";
+import {CSS_CLASS, localStorageVariable, pathTo} from "../settings";
 
 export class Basket extends HTMLBuilder {
     public create(): HTMLElement {

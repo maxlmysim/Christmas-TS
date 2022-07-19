@@ -1,4 +1,4 @@
-import {CSS_CLASS} from "./enum";
+import {CSS_CLASS} from "./settings";
 
 export function deleteSearchFieldAndBasket(): void {
     const search: HTMLElement | null = document.querySelector('.search-field')
@@ -8,7 +8,7 @@ export function deleteSearchFieldAndBasket(): void {
     search?.remove()
 }
 
-export function showCurrentPage(page: string): void {
+export function highlightCurrentPage(page: string): void {
     const links = Array.from(document.querySelectorAll('.links__link')) as HTMLElement[]
     const active: HTMLElement | null = document.querySelector(`.${page}-page-link`)
 

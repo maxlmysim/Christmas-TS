@@ -2,7 +2,7 @@ import data from "../../data/data";
 import {HTMLBuilder} from "../HTMLBuilder";
 import {paramsToy} from "../interfaces"
 import {sortSelection} from "../filtersMenu/filters-settings";
-import {CSS_CLASS, dataAttribute, pathTo} from "../enum";
+import {CSS_CLASS, dataAttribute, pathTo} from "../settings";
 
 
 class ToyCardCreator extends HTMLBuilder {

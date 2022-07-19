@@ -1,6 +1,6 @@
-import {HTMLBuilder} from "./HTMLBuilder";
-import {filtersSettings, updateToys} from "./filtersMenu/filters-settings";
-import {CSS_CLASS} from "./enum";
+import {HTMLBuilder} from "../HTMLBuilder";
+import {filtersSettings, updateToys} from "../filtersMenu/filters-settings";
+import {CSS_CLASS} from "../settings";
 
 export class SearchField extends HTMLBuilder {
     public create(): HTMLElement {

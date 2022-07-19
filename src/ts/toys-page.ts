@@ -1,11 +1,11 @@
 import {HTMLBuilder} from "./HTMLBuilder";
 import {FiltersMenu} from "./filtersMenu/filters-menu";
 import {ToysMenu} from './toysCards/toys-menu'
-import {CSS_CLASS} from "./enum";
-import {SearchField} from "./search-field";
+import {CSS_CLASS} from "./settings";
+import {SearchField} from "./elements/search-field";
 import {loadLocalStorage} from "./filtersMenu/filters-settings";
 import {deleteSearchFieldAndBasket} from "./functions";
-import {Basket} from "./basket";
+import {Basket} from "./elements/basket";
 import {classCreator} from "./interfaces";
 
 export class CreateToysPage extends HTMLBuilder {

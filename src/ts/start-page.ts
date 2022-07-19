@@ -1,5 +1,5 @@
 import {HTMLBuilder} from "./HTMLBuilder";
-import {CSS_CLASS, href} from "./enum";
+import {CSS_CLASS, href} from "./settings";
 import {deleteSearchFieldAndBasket} from "./functions";
 
 export class StartPage extends HTMLBuilder {

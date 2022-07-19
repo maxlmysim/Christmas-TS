@@ -1,3 +1,6 @@
+import {filterSortInterface, paramsToy} from "./interfaces";
+import data from "../data/data";
+
 export const colorsTranslate = [
     {en: 'yellow', ru: 'желтый'},
     {en: 'red', ru: 'красный'},
@@ -141,3 +144,59 @@ export enum value {
     sortDateDown = 'sortDateDown',
     sortDateUp = 'sortDateUp'
 }
+
+class GetParamsToys {
+    public names: string[];
+    public minCount: number;
+    public maxCount: number;
+    public minYear: number;
+    public maxYear: number;
+    public colors: ({ en: string, ru: string } | undefined)[];
+    public size: ({ en: string, ru: string } | undefined)[];
+
+    public constructor(data: paramsToy[]) {
+        this.names = data.map(toy => toy.name)
+        this.minCount = data.reduce((pre, cur) => +cur.count < pre ? +cur.count : pre, Infinity)
+        this.maxCount = data.reduce((pre, cur) => +cur.count > pre ? +cur.count : pre, -Infinity)
+        this.minYear = data.reduce((pre, cur) => +cur.year < pre ? +cur.year : pre, Infinity)
+        this.maxYear = data.reduce((pre, cur) => +cur.year > pre ? +cur.year : pre, -Infinity)
+        this.colors = Array.from(new Set(data.map(toy => colorsTranslate.find(color => toy.color === color.ru))))
+        this.size = Array.from(new Set(data.map(toy => sizeTranslate.find(size => toy.size === size.ru))))
+    }
+}
+
+export const paramsToys = new GetParamsToys(data)
+
+export const filterSort: filterSortInterface[] = [
+    {
+        value: value.base,
+        textContent: 'Выберите сортировку',
+        disabled: true
+    },
+    {
+        value: value.sortNameDown,
+        textContent: 'По названию от "А" до "Я"',
+        selected: true
+    },
+    {
+        value: value.sortNameUp,
+        textContent: 'По названию от "Я" до "А"',
+    },
+    {
+        value: value.sortDateDown,
+        textContent: 'По дате покупки по убыванию',
+    },
+    {
+        value: value.sortDateUp,
+        textContent: 'По дате покупки по возрастанию',
+    }
+]
+
+export const filterShape = shapeTranslate.map(toy => {
+    return {
+        name: toy.en,
+        textContent: toy.ru,
+    }
+})
+
+export const capacityBasket = 20;
