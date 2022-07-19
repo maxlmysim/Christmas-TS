@@ -3,7 +3,7 @@ import {loadLocalStorage, resetFiltersPage, resetFiltersSettings, setFiltersSett
 import {ToysMenu} from "../toysCards/toys-menu";
 import {resetBasket} from "../elements/basket";
 import {classCreator, classInitiator} from "../interfaces";
-import {CSS_CLASS} from "../settings";
+import {CSS_CLASS, localStorageVariable} from "../settings";
 
 
 export class ButtonsSelector extends HTMLBuilder implements classCreator{
@@ -37,7 +37,9 @@ export class ButtonsSelector extends HTMLBuilder implements classCreator{
             if (searchField) {
                 searchField.value = ''
             }
+
             loadLocalStorage()
+            localStorage.removeItem(localStorageVariable.settings)
         })
 
         clear.addEventListener('click', () => {

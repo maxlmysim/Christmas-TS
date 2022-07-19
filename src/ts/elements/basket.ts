@@ -54,6 +54,8 @@ export function resetBasket(): void {
     const activeToys = Array.from(document.querySelectorAll(`.${CSS_CLASS.toyCardBasket}`)) as HTMLElement[]
 
     activeToys.forEach(toy => toy.classList.remove(CSS_CLASS.toyCardBasket))
+
+    localStorage.removeItem(localStorageVariable.basket)
 }
 
 export function showMaxCapacityBasket(event: MouseEvent): void {
