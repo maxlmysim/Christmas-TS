@@ -1,45 +1,20 @@
 import {HTMLBuilder} from "./HTMLBuilder";
-import {CSS_CLASS, href} from "./settings";
-import {deleteSearchFieldAndBasket} from "./functions";
+import {CSS_CLASS} from "./settings";
+import {StartPage} from "./start-page";
 
 export class CreateTreePage extends HTMLBuilder {
     public init(): void {
-        const body: HTMLElement | null = document.querySelector('body')
-        if (body) {
-            body.className = CSS_CLASS.mainBackground
+        const startPage = new StartPage()
+        startPage.init()
+
+        const helpText = document.querySelector(`.${CSS_CLASS.helpText}`)
+        const buttonStart = document.querySelector(`.${CSS_CLASS.buttonStart}`)
+
+        if (helpText) {
+            helpText.textContent = 'В разработке...'
         }
-
-        const helpWindow: HTMLElement = this.createElement({
-            tag: 'div',
-            className: CSS_CLASS.helpWindow
-        })
-        const helpText: HTMLElement = this.createElement({
-            tag: 'div',
-            className: CSS_CLASS.helpText,
-            textContent: 'В разработке...'
-        })
-
-        const startButton: HTMLElement = this.createElement({
-            tag: 'a',
-            className: CSS_CLASS.buttonStart,
-            textContent: 'Выбрать игрушки',
-            href: `#${href.toysPage}`
-        })
-
-        helpWindow.append(helpText)
-
-        const mainContainer: HTMLElement | null = document.querySelector('.main-container');
-        const startPage: HTMLElement = this.createElement({
-            tag: 'div',
-            className: CSS_CLASS.startPage
-        })
-
-        startPage.append(helpWindow, startButton)
-        if (mainContainer) {
-            mainContainer.innerHTML = ''
-            mainContainer.append(startPage)
+        if (buttonStart) {
+            buttonStart.textContent = 'Выбрать игрушки'
         }
-
-        deleteSearchFieldAndBasket()
     }
 }
