@@ -105,17 +105,17 @@ export function updateToys(): void {
 }
 
 function showAllCards(): void {
-    const nodeCards = Array.from(document.querySelectorAll('.toy-card')) as HTMLElement[]
+    const nodeCards = Array.from(document.querySelectorAll(`.${CSS_CLASS.toyCard}`)) as HTMLElement[]
     nodeCards.forEach(card => card.classList.remove(CSS_CLASS.anim, CSS_CLASS.hide))
 }
 
 function checkEmpty(nodeCards: HTMLElement[], cardsHide: Element[]): void {
-    const place: HTMLElement | null = document.querySelector('.no-results__container')
+    const place: HTMLElement | null = document.querySelector(`.${CSS_CLASS.noResultsContainer}`)
     place?.remove()
 
     if (nodeCards.length === cardsHide.length) {
         const results: classCreator = new NoResults()
-        const place: HTMLElement | null = document.querySelector('.toys-cards')
+        const place: HTMLElement | null = document.querySelector(`.${CSS_CLASS.toysCards}`)
         place?.append(results.create())
     }
 }
@@ -198,8 +198,8 @@ export function loadLocalStorage(): void {
 }
 
 export function resetFiltersPage(): void {
-    const toysPage = document.querySelector('.toys-page') as HTMLElement | null
-    document.querySelector('.filters-menu')?.remove()
+    const toysPage = document.querySelector(`.${CSS_CLASS.toysPage}`) as HTMLElement | null
+    document.querySelector(`.${CSS_CLASS.filtersMenu}`)?.remove()
     toysPage?.append((new FiltersMenu()).create())
 }
 

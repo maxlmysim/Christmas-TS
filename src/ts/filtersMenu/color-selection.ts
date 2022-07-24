@@ -28,7 +28,7 @@ export class ColorSelector extends HTMLBuilder implements classCreator{
         }))
 
         colorBlocks.addEventListener('click', (event) => {
-            const elem = (event.target as HTMLElement).closest('.colors__color')
+            const elem = (event.target as HTMLElement).closest(`.${CSS_CLASS.colorsColor}`)
 
             if(!elem) return;
 

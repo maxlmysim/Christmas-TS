@@ -4,7 +4,7 @@ import {deleteSearchFieldAndBasket} from "./functions";
 
 export class StartPage extends HTMLBuilder {
     public init(): void {
-        const body: HTMLElement | null = document.querySelector('body')
+        const body: HTMLElement | null = document.querySelector(`${CSS_CLASS.body}`)
         if (body) {
             body.className = CSS_CLASS.mainBackground
         }
@@ -28,7 +28,7 @@ export class StartPage extends HTMLBuilder {
 
         helpWindow.append(helpText)
 
-        const mainContainer: HTMLElement | null = document.querySelector('.main-container');
+        const mainContainer: HTMLElement | null = document.querySelector(`.${CSS_CLASS.mainContainer}`);
         const startPage: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.startPage

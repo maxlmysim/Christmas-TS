@@ -45,7 +45,7 @@ export class ShapeSelection extends HTMLBuilder {
         }))
 
         shapeList.addEventListener('click', event => {
-            const elem: HTMLElement | null = (event.target as HTMLElement).closest('.shape__toy')
+            const elem: HTMLElement | null = (event.target as HTMLElement).closest(`.${CSS_CLASS.shapeToy}`)
 
             if (!elem) return;
 

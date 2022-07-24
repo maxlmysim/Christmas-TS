@@ -33,7 +33,7 @@ export class ButtonsSelector extends HTMLBuilder implements classCreator{
 
             resetFiltersPage()
 
-            const searchField = document.querySelector('.search-field') as HTMLInputElement
+            const searchField = document.querySelector(`.${CSS_CLASS.searchField}`) as HTMLInputElement
             if (searchField) {
                 searchField.value = ''
             }

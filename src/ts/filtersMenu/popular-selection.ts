@@ -33,7 +33,7 @@ export class PopularSelect extends HTMLBuilder {
         container.append(input, label)
 
         container.addEventListener('change', (event) => {
-            const elem: HTMLInputElement | null = (event.target as HTMLElement).closest("input[name=popular]")
+            const elem: HTMLInputElement | null = (event.target as HTMLElement).closest(`input[name=${checkboxName.popular}]`)
 
             if (!elem) return;
 

@@ -24,6 +24,9 @@ export const shapeTranslate = [
 ]
 
 export enum CSS_CLASS {
+    body = 'body',
+    mainContainer = 'main-container',
+    headerContainer = 'header-container',
     filtersSort = 'filters__sort',
     sort = 'sort',
     sortName = 'sort__name',
@@ -47,7 +50,6 @@ export enum CSS_CLASS {
     buttonStart = 'btn-start',
     startPage = 'start-page',
     toysPageFilters = 'toys-page-filters',
-    treePage = 'tree-page',
     toysPage = 'toys-page',
     filtersSlider = 'filters__slider',
     slider = 'slider',
@@ -93,6 +95,8 @@ export enum CSS_CLASS {
     noResultsContainer = 'no-results__container',
     noResultsText = 'no-results__text',
     searchField = 'search-field',
+    linksLink = 'links__link',
+    pageLink = 'page-link'
 }
 
 export enum localStorageVariable {

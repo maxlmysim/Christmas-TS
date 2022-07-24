@@ -10,12 +10,12 @@ import {classCreator} from "./interfaces";
 
 export class CreateToysPage extends HTMLBuilder {
     public init(): void {
-        const body: HTMLElement | null = document.querySelector('body')
+        const body: HTMLElement | null = document.querySelector(`${CSS_CLASS.body}`)
         if (body) {
             body.className = CSS_CLASS.toysPageFilters
         }
 
-        const mainContainer: HTMLElement | null = document.querySelector('.main-container');
+        const mainContainer: HTMLElement | null = document.querySelector(`.${CSS_CLASS.mainContainer}`);
         const toysPage: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.toysPage
@@ -35,7 +35,7 @@ export class CreateToysPage extends HTMLBuilder {
         const basket: classCreator = new Basket()
         const searchField: classCreator = new SearchField()
 
-        const headerContainer: HTMLElement | null = document.querySelector('.header-container');
+        const headerContainer: HTMLElement | null = document.querySelector(`.${CSS_CLASS.headerContainer}`);
         headerContainer?.append(searchField.create(), basket.create())
 
         loadLocalStorage()

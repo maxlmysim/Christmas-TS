@@ -50,7 +50,7 @@ export class SizeSelector extends HTMLBuilder {
         sizeContainer.append(...sizes)
 
         sizeContainer.addEventListener('change', (event) => {
-            const elem: HTMLInputElement | null = (event.target as HTMLElement).closest("input[name=size]")
+            const elem: HTMLInputElement | null = (event.target as HTMLElement).closest(`input[name=${checkboxName.size}]`)
 
             if (!elem) return;
 
