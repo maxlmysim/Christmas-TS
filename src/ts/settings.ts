@@ -47,6 +47,7 @@ export enum CSS_CLASS {
     buttonStart = 'btn-start',
     startPage = 'start-page',
     toysPageFilters = 'toys-page-filters',
+    treePage = 'tree-page',
     toysPage = 'toys-page',
     filtersSlider = 'filters__slider',
     slider = 'slider',

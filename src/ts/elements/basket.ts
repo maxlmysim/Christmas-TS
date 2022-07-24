@@ -19,10 +19,8 @@ export class Basket extends HTMLBuilder {
 
         return basket
     }
-}
 
-class FullBasket extends HTMLBuilder {
-    public create(): HTMLElement {
+    public full(): HTMLElement {
         const popup: HTMLElement = this.createElement({
             tag: 'div',
             className: CSS_CLASS.popup
@@ -39,7 +37,6 @@ class FullBasket extends HTMLBuilder {
         return popup
     }
 }
-
 
 let basketFromLocalStorage: string | null = localStorage.getItem(localStorageVariable.basket)
 if (basketFromLocalStorage) {
@@ -59,7 +56,7 @@ export function resetBasket(): void {
 }
 
 export function showMaxCapacityBasket(event: MouseEvent): void {
-    const popup: HTMLElement = (new FullBasket()).create()
+    const popup: HTMLElement = (new Basket()).full()
     popup.style.top = `${event.clientY}px`
     popup.style.left = `${event.clientX}px`
 
