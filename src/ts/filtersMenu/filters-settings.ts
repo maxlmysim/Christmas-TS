@@ -216,24 +216,24 @@ export function sortSelection(newData: paramsToy[]): paramsToy[] {
     return newData
 }
 
-const shapeSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.shape.includes(toy.shape))
+export const shapeSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.shape.includes(toy.shape))
 
-const quantitySelection = (newData: paramsToy[]): paramsToy[] => {
+export const quantitySelection = (newData: paramsToy[]): paramsToy[] => {
     newData = newData.filter(toy => +toy.count >= filtersSettings.quantityMin &&
         +toy.count <= filtersSettings.quantityMax)
     return newData
 }
 
-const yearSelection = (newData: paramsToy[]): paramsToy[] => {
+export const yearSelection = (newData: paramsToy[]): paramsToy[] => {
     newData = newData.filter(toy => +toy.year >= filtersSettings.yearMin &&
         +toy.year <= filtersSettings.yearMax)
     return newData
 }
 
-const colorSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.color.includes(toy.color))
+export const colorSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.color.includes(toy.color))
 
-const sizeSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.size.includes(toy.size))
+export const sizeSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => filtersSettings.size.includes(toy.size))
 
-const popularSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => toy.favorite)
+export const popularSelection = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => toy.favorite)
 
 export const searchToys = (newData: paramsToy[]): paramsToy[] => newData.filter(toy => toy.name.toLowerCase().includes(filtersSettings.search.toLowerCase()))
